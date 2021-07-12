@@ -16,11 +16,12 @@ public:
     //Destructeur
     ~Traitements();
 
-    void tri_alphabetique(std::vector<std::string> &tabValeurs);
-    void tri_non_alphabetique(std::vector<std::string> &tabValeurs);
-    void afficherTitreAlpha();
-    void afficherTitreNonAlpha();
-    void suppDoublons(std::vector<std::string> &tabValeurs);
+    //Une fonction qui permet de faire un tri alphabétique
+    static void TriAlphabetique(std::vector<std::string> &tabValeurs);
+    //Une fonction qui permet de faire un tri alphabétique inverse
+    static void TriNonAlphabetique(std::vector<std::string> &tabValeurs);
+    //Une fonction qui permet de supprimer les doublons
+    static void SuppDoublons(std::vector<std::string> &tabValeurs);
 };
 
 #endif // TRAITEMENTS_H

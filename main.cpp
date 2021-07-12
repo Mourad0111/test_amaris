@@ -1,3 +1,4 @@
+//Inclusions C++
 #include <iostream>
 #include <stdlib.h>
 #include <string.h>
@@ -5,14 +6,14 @@
 #include <limits>
 #include <algorithm>
 
+//Inclusions perso
+#include "traitements.h"
+
 using namespace std;
 
 
-void tri_alphabetique(vector<string> &tabValeurs);
-void tri_non_alphabetique(vector<string> &tabValeurs);
 void afficherTitreAlpha();
 void afficherTitreNonAlpha();
-void suppDoublons(vector<string> &tabValeurs);
 
 int main()
 {
@@ -25,7 +26,7 @@ int main()
         if ( cin.eof() )
         {
             // pour windows; Fin du flux d'entree !
-            return false;
+            return 0;
         }
         else if ( cin.fail() ) // On cas d'introduction de caracteres au lieu de nombres
         {
@@ -46,6 +47,7 @@ int main()
     }
 
 
+    //On affiche les valeurs du tableau, comme ils etaient entrées par l'utilisateur
     for(int i(0); i<(int)tabValeurs.size(); i++)
     {
         cout << tabValeurs[i] << endl;
@@ -63,7 +65,7 @@ int main()
         if ( cin.eof() )
         {
             // pour windows; Fin du flux d'entree !
-            return false;
+            return 0;
         }
         else if ( cin.fail() ) // On cas d'introduction de caracteres au lieu de nombres
         {
@@ -83,23 +85,23 @@ int main()
     case 1 : //Tri alphabetique
     {
         afficherTitreAlpha();
-        tri_alphabetique(tabValeurs);
-        tabValeurs.erase( unique( tabValeurs.begin(), tabValeurs.end() ), tabValeurs.end() );
+        Traitements::TriAlphabetique(tabValeurs);
+        Traitements::SuppDoublons(tabValeurs);
         for (int i = 0; i < (int)tabValeurs.size(); i++)
-            printf("%s ", tabValeurs[i].c_str());
-        printf("\n");
+            cout << tabValeurs[i] << " ";
+        cout << endl;
         break;
     }
 
     case 2 : //Tri alphabetique inverse
     {
         afficherTitreNonAlpha();
-        tri_non_alphabetique(tabValeurs);
-        tabValeurs.erase( unique( tabValeurs.begin(), tabValeurs.end() ), tabValeurs.end() );
+        Traitements::TriNonAlphabetique(tabValeurs);
+        Traitements::SuppDoublons(tabValeurs);
         for (int i = 0; i < (int)tabValeurs.size(); i++)
-            printf("%s ", tabValeurs[i].c_str());
+            cout << tabValeurs[i] << " ";
+        cout << endl;
 
-        printf("\n");
         break;
     }
 
@@ -107,85 +109,23 @@ int main()
     case 3 :
     {
         afficherTitreAlpha();
-        tri_alphabetique(tabValeurs);
-        tabValeurs.erase( unique( tabValeurs.begin(), tabValeurs.end() ), tabValeurs.end() );
+        Traitements::TriAlphabetique(tabValeurs);
+        Traitements::SuppDoublons(tabValeurs);
         for (int i = 0; i < (int)tabValeurs.size(); i++)
-            printf("%s ", tabValeurs[i].c_str());
-        printf("\n");
+            cout << tabValeurs[i] << " ";
+        cout << endl;
+
         afficherTitreNonAlpha();
-        tri_non_alphabetique(tabValeurs);
-        tabValeurs.erase( unique( tabValeurs.begin(), tabValeurs.end() ), tabValeurs.end() );
+        Traitements::TriNonAlphabetique(tabValeurs);
+        Traitements::SuppDoublons(tabValeurs);
         for (int i = 0; i < (int)tabValeurs.size(); i++)
-            printf("%s ", tabValeurs[i].c_str());
-        printf("\n");
+            cout << tabValeurs[i] << " ";
+        cout << endl;
         break;
     }
 
     }
     return 0;
-}
-
-void suppDoublons(vector<string> &tabValeurs)
-{
-    vector<string> temp;
-    vector<bool> valASuppr(tabValeurs.size(), false);
-
-    for(int i(0); i < (int)tabValeurs.size(); i++)
-    {
-
-        for(int j(i+1); j < (int)tabValeurs.size(); j++)
-        {
-            if(strcmp(tabValeurs[i].c_str(), tabValeurs[j].c_str()))
-            {
-                if(!valASuppr[j])
-                    valASuppr.push_back(true);
-            }
-        }
-    }
-    vector<bool>::iterator it;
-    for(int i(0); i<(int)valASuppr.size(); i++)
-    {
-        if(valASuppr[i])
-            temp.push_back(tabValeurs[i]);
-    }
-    tabValeurs.clear();
-    //tabValeurs = temp;
-}
-
-//Tri alphabetique
-void tri_alphabetique(vector<string> &tabValeurs)
-{
-    string temp;
-    for (unsigned int i = 0; i < tabValeurs.size(); i++)
-    {
-        for (unsigned int j = 0; j < tabValeurs.size(); j++)
-        {
-            if (strcmp(tabValeurs[i].c_str(), tabValeurs[j].c_str()) < 0)
-            {
-                temp = tabValeurs[i];
-                tabValeurs[i] = tabValeurs[j];
-                tabValeurs[j] = temp;
-            }
-        }
-    }
-}
-
-//Tri alphabetique inverse
-void tri_non_alphabetique(vector<string> &tabValeurs)
-{
-    string temp;
-    for (unsigned int i = 0; i < tabValeurs.size(); i++)
-    {
-        for (unsigned int j = 0; j < tabValeurs.size(); j++)
-        {
-            if (strcmp(tabValeurs[j].c_str(), tabValeurs[i].c_str()) < 0)
-            {
-                temp = tabValeurs[j];
-                tabValeurs[j] = tabValeurs[i];
-                tabValeurs[i] = temp;
-            }
-        }
-    }
 }
 
 //Juste pour afficher les titres
@@ -203,3 +143,4 @@ void afficherTitreNonAlpha()
     cout << "*Tri alphabetique inverse*" << endl;
     cout << "**************************" << endl;
 }
+
