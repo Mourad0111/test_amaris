@@ -4,8 +4,6 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += \
-        main.cpp \
-        traitements.cpp
+        main.cpp
 
-HEADERS += \
-    traitements.h
+HEADERS +=
